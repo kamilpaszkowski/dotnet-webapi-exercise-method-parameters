@@ -14,30 +14,34 @@ namespace Euvic.WebAPI.EndpointParameterTypes.Controllers
         //
         // ----------------------------------------------------------------------------------------------------------------
 
+        // ten endpoint jest gotowy
         // endpoint zawiera dodatkowe parametery które służą do filtrowania wyników
         // request będzie wygłądał tak: /api/trainings?name=webapi
         [HttpGet("")]
         public IActionResult GetTrainings([FromQuery] GetTrainingsListRequest request) => Ok(new TrainingsList());
 
+        // ten endpoint jest gotowy
         // endpoint zawiera przykład jaki typ parameteru musi byc aby móć zrobić upload pliku
         [HttpPost("{id}/presentation")]
         public IActionResult UploadPresentation([FromRoute] int id, [FromForm] IFormFile presentationFile) => NoContent();
 
-        // endpoint oczekuje dodatkowych parametery które służą do filtrowania wyników. Zawarte one są w obiekcie GetTrainingAttendeesRequest
+        // endpointy poniżej są do zrobienia
+        // -----------------------------------------------------------------------------------------------------------------
+
         // request będzie wygłądał tak: /api/trainings/1/attendees?firstName=kamil
         [HttpGet("{id}/attendees")]
-        public IActionResult GetTrainingAttendees() => Ok();
+        public IActionResult GetTrainingAttendees([?] int id, [?] GetTrainingAttendeesRequest request) => Ok();
 
         // endpoint oczekuje przekazania danych na temat nowego treningu w obiekcie CreateTrainingRequest
         [HttpPost("")]
-        public IActionResult CreateTraining() => NoContent();
+        public IActionResult CreateTraining([?] CreateTrainingRequest request) => NoContent();
 
         // endpoint oczekuje paramteru id jako cześć route
         [HttpDelete("{id}")]
-        public IActionResult DeleteTraining() => NoContent();
+        public IActionResult DeleteTraining([?] int id) => NoContent();
 
-        // endpoint oczekuje parametru id jako część route oraz przekazania informacji potrzebnych do uaktualnienia treningu. Informacje zawarte sa w obiekcie UpdateTrainingRequest
+        // endpoint oczekuje parametru id jako część route oraz przekazania informacji potrzebnych do uaktualnienia treningu.
         [HttpPut("{id}")]
-        public IActionResult UpdateTraining() => NoContent();
+        public IActionResult UpdateTraining([?] int id, [?] UpdateTrainingRequest request) => NoContent();
     }
 }
